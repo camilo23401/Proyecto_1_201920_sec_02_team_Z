@@ -27,7 +27,19 @@ public class Controller
 			switch(opcionEscogida)
 			{
 			case 1:
+				System.out.println("Digite el número del trimestre a consultar: ");
+				String semestrePorRevisar = "";
+				semestrePorRevisar = lector.next();
+				try
+				{
+					String rta = proyecto.agregarDatos(semestrePorRevisar);
+					System.out.println(rta);
 
+				}
+				catch (Exception e)
+				{
+					e.getMessage();
+				}
 				break;
 			}
 		}
