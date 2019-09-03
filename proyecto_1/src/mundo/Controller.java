@@ -32,8 +32,11 @@ public class Controller
 				semestrePorRevisar = lector.next();
 				try
 				{
-					String rta = proyecto.agregarDatos(semestrePorRevisar);
-					System.out.println(rta);
+					String[] rta = proyecto.agregarDatos(semestrePorRevisar);
+					for(int i=0;i<rta.length;i++)
+					{
+						System.out.println(rta[i]);
+					}
 
 				}
 				catch (Exception e)
