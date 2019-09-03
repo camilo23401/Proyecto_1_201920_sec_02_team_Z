@@ -3,18 +3,18 @@ package mundo;
 public class ViajeUber 
 {
 
-	private String sourceid;
-	private String dstid;
-	private String mes;
-	private String dia;
-	private String hora;
-	private String tiempoPromedio;
-	private String desviacionEstandarTiempo;
-	private String tiempoPromedioGeometrico;
-	private String desviacionEstandarTiempoGeometrico;
+	private int sourceid;
+	private int dstid;
+	private short mes;
+	private short dia;
+	private short hora;
+	private double tiempoPromedio;
+	private double desviacionEstandarTiempo;
+	private double tiempoPromedioGeometrico;
+	private double desviacionEstandarTiempoGeometrico;
 
 
-	public ViajeUber(String pSourceid, String pDstid, String pHora, String pTiempoPromedio, String pMes, String pDia, String pDesviacionEstandarTiempo, String pTiempoPromedioGeometrico, String pDesviacionEstandarTiempoGeometrico)
+	public ViajeUber(int pSourceid, int pDstid, short pHora, double pTiempoPromedio, short pMes, short pDia, double pDesviacionEstandarTiempo, double pTiempoPromedioGeometrico, double pDesviacionEstandarTiempoGeometrico)
 	{
 		sourceid = pSourceid;
 		dstid = pDstid;
@@ -26,39 +26,39 @@ public class ViajeUber
 		tiempoPromedioGeometrico = pTiempoPromedioGeometrico;
 		desviacionEstandarTiempoGeometrico = pDesviacionEstandarTiempoGeometrico;
 	}
-	public String darSourceid()
+	public int darSourceid()
 	{
 		return sourceid;
 	}
-	public String darDstid()
+	public int darDstid()
 	{
 		return dstid;
 	}
-	public String darMes()
+	public short darMes()
 	{
 		return mes;	
 	}
-	public String darDia()
+	public short darDia()
 	{
 		return dia;
 	}
-	public String darHora()
+	public short darHora()
 	{
 		return hora;
 	}
-	public String darTiempoPromedio()
+	public double darTiempoPromedio()
 	{
 		return tiempoPromedio;
 	}
-	public String darDesviacionEstandarTiempo()
+	public double darDesviacionEstandarTiempo()
 	{
 		return desviacionEstandarTiempo;
 	}
-	public String darTiempoPromedioGeometrico()
+	public double darTiempoPromedioGeometrico()
 	{
 		return tiempoPromedioGeometrico;
 	}
-	public String darDesviacionEstandarTiempoGeometrico()
+	public double darDesviacionEstandarTiempoGeometrico()
 	{
 		return desviacionEstandarTiempoGeometrico;
 	}

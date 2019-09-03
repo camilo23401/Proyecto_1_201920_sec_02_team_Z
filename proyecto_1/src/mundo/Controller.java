@@ -30,19 +30,35 @@ public class Controller
 				System.out.println("Digite el número del trimestre a consultar: ");
 				String semestrePorRevisar = "";
 				semestrePorRevisar = lector.next();
-				try
+				if(Integer.parseInt(semestrePorRevisar)<0 || Integer.parseInt(semestrePorRevisar)>4)
 				{
-					String[] rta = proyecto.agregarDatos(semestrePorRevisar);
-					for(int i=0;i<rta.length;i++)
+					System.out.println("Digite un dato válido. Un año solo tiene 4 trimestres.");	
+				}
+				else
+				{
+					try
 					{
-						System.out.println(rta[i]);
+						String[] rta = proyecto.agregarDatos(semestrePorRevisar);
+						for(int i=0;i<rta.length;i++)
+						{
+							System.out.println(rta[i]);
+						}
+					}
+					catch (Exception e)
+					{
+						System.out.println("Error fatal. No se pudo leer el archivo deseado");
 					}
 				}
-				catch (Exception e)
-				{
-					e.getMessage();
-				}
+
 				break;
+				
+			case 2:
+				System.out.println("--------------------------------------- \n Adiós \n ---------------------------------------"); 
+				lector.close();
+				finalizado = true;
+				break;	
+
+
 			}
 		}
 	}

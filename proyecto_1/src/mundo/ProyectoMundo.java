@@ -29,11 +29,11 @@ public class ProyectoMundo
 
 
 		String [] respuestas = new String[5];
-		respuestas [0]= cargarViajesMensuales(pTrimestre) + "";
-		respuestas [1]= cargarViajesSemanales(pTrimestre) + "";
-		respuestas [2]= cargarViajesHorarios(pTrimestre)+"";
-		respuestas [3]= buscarMayorIdentificador();
-		respuestas [4]= buscarMenorIdentificador();
+		respuestas [0]= "Número de viajes encontrados para el trimestre en el archivo mensual: " + cargarViajesMensuales(pTrimestre);
+		respuestas [1]= "Número de viajes encontrados para el trimestre en el archivo semanal: " + cargarViajesSemanales(pTrimestre);
+		respuestas [2]= "Número de viajes encontrados para el trimestre en el archivo por horas: " + cargarViajesHorarios(pTrimestre);
+		respuestas [3]= "Mayor identificador de zona encontrado: " + buscarMayorIdentificador();
+		respuestas [4]= "Menor identificador de zona encontrado: "+ buscarMenorIdentificador();
 
 		return respuestas;
 	}
@@ -47,7 +47,7 @@ public class ProyectoMundo
 		{
 			if(contador!=0)
 			{
-				ViajeUber viajeNuevo = new ViajeUber(siguiente[0],siguiente[1], null, siguiente[3], siguiente[2], null, siguiente[4], siguiente[5], siguiente[6]);
+				ViajeUber viajeNuevo = new ViajeUber(Integer.parseInt(siguiente[0]),Integer.parseInt(siguiente[1]), Short.parseShort("-1"), Double.parseDouble(siguiente[3]), Short.parseShort(siguiente[2]),Short.parseShort("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));
 				viajesMensuales.agregarElemento(viajeNuevo);
 			}
 			contador++;
@@ -65,13 +65,12 @@ public class ProyectoMundo
 		{
 			if(contador!=0)
 			{
-				ViajeUber viajeNuevo = new ViajeUber(siguiente[0], siguiente[1], null, siguiente[3], null, siguiente[2], siguiente[4], siguiente[5], siguiente[6]);
+				ViajeUber viajeNuevo = new ViajeUber(Integer.parseInt(siguiente[0]), Integer.parseInt(siguiente[1]), Short.parseShort("-1"), Double.parseDouble(siguiente[3]), Short.parseShort("-1"), Short.parseShort(siguiente[2]), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));
 				viajesSemanales.agregarElemento(viajeNuevo);
 			}
 			contador++;
 		}
 		lector2.close();
-
 		return contador;
 	}
 	public int cargarViajesHorarios(String pTrimestre) throws IOException
@@ -84,7 +83,7 @@ public class ProyectoMundo
 		{
 			if(contador!=0)
 			{
-				ViajeUber viajeNuevo = new ViajeUber(siguiente[0], siguiente[1], siguiente[2], siguiente[3], null, null, siguiente[4], siguiente[5], siguiente[6]);
+				ViajeUber viajeNuevo = new ViajeUber(Integer.parseInt(siguiente[0]), Integer.parseInt(siguiente[1]), Short.parseShort(siguiente[2]), Double.parseDouble(siguiente[3]), Short.parseShort("-1"), Short.parseShort("-1"), Double.parseDouble(siguiente[4]), Double.parseDouble(siguiente[5]), Double.parseDouble(siguiente[6]));
 				viajesHorarios.agregarElemento(viajeNuevo);
 			}
 			contador++;
@@ -123,7 +122,7 @@ public class ProyectoMundo
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
-			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			int sourceActual = viajeActual.darSourceid();
 			if(sourceActual>mayor)
 			{
 				mayor = sourceActual;
@@ -139,7 +138,7 @@ public class ProyectoMundo
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
-			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			int sourceActual = viajeActual.darSourceid();
 			if(sourceActual>mayor)
 			{
 				mayor = sourceActual;
@@ -155,7 +154,7 @@ public class ProyectoMundo
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
-			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			int sourceActual = viajeActual.darSourceid();
 			if(sourceActual>mayor)
 			{
 				mayor = sourceActual;
@@ -192,7 +191,7 @@ public class ProyectoMundo
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
-			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			int sourceActual = viajeActual.darSourceid();
 			if(menor==0)
 			{
 				menor = sourceActual;
@@ -215,7 +214,7 @@ public class ProyectoMundo
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
-			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			int sourceActual = viajeActual.darSourceid();
 			if(menor==0)
 			{
 				menor = sourceActual;
@@ -238,7 +237,7 @@ public class ProyectoMundo
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
-			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			int sourceActual =viajeActual.darSourceid();
 			if(menor==0)
 			{
 				menor = sourceActual;
