@@ -52,7 +52,6 @@ public class ProyectoMundo
 			}
 			contador++;
 		}
-		System.out.println(contador);
 		lector.close();
 		return contador;
 	}
@@ -71,7 +70,6 @@ public class ProyectoMundo
 			}
 			contador++;
 		}
-		System.out.println(contador);
 		lector2.close();
 
 		return contador;
@@ -91,7 +89,6 @@ public class ProyectoMundo
 			}
 			contador++;
 		}
-		System.out.println(contador);
 		lector3.close();
 		return contador;
 	}
@@ -165,12 +162,97 @@ public class ProyectoMundo
 			}
 			actual = actual.darSiguiente();
 		}
-		return 0;
+		return mayor;
 	}
 	public String buscarMenorIdentificador()
 	{
 		String respuesta = "";
+		int x = buscarMenorIdentificadorMensual();
+		int y = buscarMenorIdentificadorSemanal();
+		int z = buscarMenorIdentificadorHorario();
+		if(x<=y&&x<=z)
+		{
+			respuesta = x + "";
+		}
+		else if(y<=x && y<=z)
+		{
+			respuesta = y + "";
+		}
+		else if(z<=x && z<=y)
+		{
+			respuesta = z + "";
+		}
+		
 		return respuesta;
+	}
+	public int buscarMenorIdentificadorMensual()
+	{
+		int menor=0;
+		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			if(menor==0)
+			{
+				menor = sourceActual;
+			}
+			else
+			{
+				if(menor>sourceActual)
+				{
+					menor = sourceActual;
+				}
+			}
+			actual = actual.darSiguiente();
+		}
+		return menor;
+	}
+	public int buscarMenorIdentificadorSemanal()
+	{
+		int menor=0;
+		NodoListaEncadenada<ViajeUber> actual = viajesSemanales.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			if(menor==0)
+			{
+				menor = sourceActual;
+			}
+			else
+			{
+				if(menor>sourceActual)
+				{
+					menor = sourceActual;
+				}
+			}
+			actual = actual.darSiguiente();
+		}
+		return menor;
+	}
+	public int buscarMenorIdentificadorHorario()
+	{
+		int menor=0;
+		NodoListaEncadenada<ViajeUber> actual = viajesHorarios.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			if(menor==0)
+			{
+				menor = sourceActual;
+			}
+			else
+			{
+				if(menor>sourceActual)
+				{
+					menor = sourceActual;
+				}
+			}
+			actual = actual.darSiguiente();
+		}
+		return menor;
 	}
 	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasMensual(String pSourceid, String pDestino, String pMes)
 	{
