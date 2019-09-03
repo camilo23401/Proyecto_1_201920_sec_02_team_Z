@@ -266,4 +266,36 @@ public class ProyectoMundo
 	{
 		return "";
 	}
+	public ListaEncadenada<ViajeUber> consultarNViajesMasDemoradosMensual(int pN, String pMes)
+	{
+		return null;
+	}
+	public String comparacionTiemposPromedioMes(String pSourceid,String pMes)
+	{
+		return "";
+	}
+	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasDiario(String pSourceid, String pDestino, String pDia)
+	{
+		return null;
+	}
+	public ListaEncadenada<ViajeUber> consultarNViajesMasDemoradosDiarios(int pN, String pDia)
+	{
+		return null;
+	}
+	public String comparacionTiemposPromedioDia(String pSourceid,String pDia)
+	{
+		return "";
+	}
+	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasHora(String pSourceid, String pDestino, String pHora)
+	{
+		return null;
+	}
+	public ListaEncadenada<ViajeUber> consultarCantidadViajesHora(String pOrigen, String pDestino, String pHoraInicio,String pHoraFin)
+	{
+		return null;
+	}
+	public void generarTablaAscii(String pSourceId,String pDestino)
+	{
+		
+	}
 }
