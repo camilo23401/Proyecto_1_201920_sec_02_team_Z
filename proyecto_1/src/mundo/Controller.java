@@ -37,7 +37,6 @@ public class Controller
 					{
 						System.out.println(rta[i]);
 					}
-
 				}
 				catch (Exception e)
 				{

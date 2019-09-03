@@ -28,12 +28,12 @@ public class ProyectoMundo
 	{
 
 
-		String [] respuestas = new String[4];
-		cargarViajesMensuales(pTrimestre);
-		cargarViajesSemanales(pTrimestre);
-		//cargarViajesHorarios(pTrimestre);
-		buscarMayorIdentificador();
-		buscarMenorIdentificador();
+		String [] respuestas = new String[5];
+		respuestas [0]= cargarViajesMensuales(pTrimestre) + "";
+		respuestas [1]= cargarViajesSemanales(pTrimestre) + "";
+		respuestas [2]= cargarViajesHorarios(pTrimestre)+"";
+		respuestas [3]= buscarMayorIdentificador();
+		respuestas [4]= buscarMenorIdentificador();
 
 		return respuestas;
 	}
@@ -97,8 +97,75 @@ public class ProyectoMundo
 	}
 	public String buscarMayorIdentificador()
 	{
+
 		String respuesta = "";
+		int x = buscarMayorIdentificadorMeses();
+
+		int y = buscarMayorIdentificadorSemanas();
+
+		int z = buscarMayorIdentificadorHorarios();
+
+		if(x>=y&&x>=z)
+		{
+			respuesta = x + "";
+		}
+		else if(y>=x&&y>=z)
+		{
+			respuesta = y + "";
+		}
+		else if(z>=x&&z>=y)
+		{
+			respuesta = z + "";
+		}
 		return respuesta;
+	}
+	public int buscarMayorIdentificadorMeses()
+	{
+		int mayor = 0;
+		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			if(sourceActual>mayor)
+			{
+				mayor = sourceActual;
+			}
+			actual = actual.darSiguiente();
+		}
+		return mayor;	
+	}
+	public int buscarMayorIdentificadorSemanas()
+	{
+		int mayor = 0;
+		NodoListaEncadenada<ViajeUber> actual = viajesSemanales.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			if(sourceActual>mayor)
+			{
+				mayor = sourceActual;
+			}
+			actual = actual.darSiguiente();
+		}
+		return mayor;
+	}
+	public int buscarMayorIdentificadorHorarios()
+	{
+		int mayor = 0;
+		NodoListaEncadenada<ViajeUber> actual = viajesHorarios.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			int sourceActual = Integer.parseInt(viajeActual.darSourceid());
+			if(sourceActual>mayor)
+			{
+				mayor = sourceActual;
+			}
+			actual = actual.darSiguiente();
+		}
+		return 0;
 	}
 	public String buscarMenorIdentificador()
 	{
