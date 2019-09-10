@@ -3,6 +3,8 @@ package mundo;
 import java.util.Scanner;
 
 import consola.InteraccionConsola;
+import data_structures.ListaEncadenada;
+import data_structures.NodoListaEncadenada;
 
 public class Controller 
 {
@@ -51,8 +53,66 @@ public class Controller
 				}
 
 				break;
-				
+
 			case 2:
+				System.out.println("Digite el mes a consultar");
+				String mes = lector.next();
+				System.out.println("Digite el número de la zona de origen");
+				String sourceId = lector.next();
+				System.out.println("Digite el número de la zona de destino");
+				String dstid = lector.next();
+				ListaEncadenada<ViajeUber> consultados = new ListaEncadenada<ViajeUber>();
+				consultados = proyecto.consultarTiemposEntreZonasMensual(sourceId, dstid, mes);
+				NodoListaEncadenada<ViajeUber> actual = consultados.darNodoActual();
+				int contador = 0;
+				if(consultados!=null)
+				{
+					while(actual!=null)
+					{
+						contador++;
+						ViajeUber elementoActual = actual.darElemento();
+						System.out.println("---------------------------------------------------------------------------------------");
+						System.out.println("Número de viaje: " + contador);
+						System.out.println("Tiempo promedio: " + elementoActual.darTiempoPromedio());
+						System.out.println("Desviación estándar: " + elementoActual.darDesviacionEstandarTiempo());
+						System.out.println("---------------------------------------------------------------------------------------");
+						actual = actual.darSiguiente();
+					}	
+				}
+				else
+				{
+					System.out.println("No se encontró información que coincida con los parámetros ingresados");
+				}
+				break;
+
+			case 3:
+				System.out.println("Digite la hora de inicio");
+				String horaInicio = lector.next();
+				System.out.println("Digite la zona de origen");
+				String origen = lector.next();
+				System.out.println("Digite la hora de fin");
+				String horaFin = lector.next();
+				System.out.println("Digite la zona de destino");
+				String destino = lector.next();
+
+				ListaEncadenada<ViajeUber> resultados = proyecto.consultarCantidadViajesHora(origen, destino, horaInicio, horaFin);
+				NodoListaEncadenada<ViajeUber> actualResultados = resultados.darNodoActual();
+				int contadorMetodoHoras = 0;
+				while(actualResultados!=null)
+				{
+					contadorMetodoHoras++;
+					ViajeUber actualResultado = actualResultados.darElemento();
+					System.out.println("---------------------------------------------------------------------------------------");
+					System.out.println("Número de viaje: " + contadorMetodoHoras);
+					System.out.println("Tiempo promedio: " + actualResultado.darTiempoPromedio());
+					System.out.println("Desviación estándar: " + actualResultado.darDesviacionEstandarTiempo());
+					System.out.println("---------------------------------------------------------------------------------------");
+					actualResultados = actualResultados.darSiguiente();
+				}
+				break;
+
+
+			case 4:
 				System.out.println("--------------------------------------- \n Adiós \n ---------------------------------------"); 
 				lector.close();
 				finalizado = true;

@@ -255,11 +255,35 @@ public class ProyectoMundo
 	}
 	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasMensual(String pSourceid, String pDestino, String pMes)
 	{
-		return null;
+		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
+		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber elementoActual = actual.darElemento();
+			if(Integer.parseInt(pMes)==elementoActual.darMes())
+			{
+				if(Integer.parseInt(pSourceid)==elementoActual.darSourceid()&&Integer.parseInt(pDestino)==elementoActual.darDstid())
+				{
+							rta.agregarElemento(elementoActual);
+				}
+			}
+			actual = actual.darSiguiente();
+		}
+		return rta;
 	}
 	public ListaEncadenada<ViajeUber> consultarNViajesMasDemorados(int pN, String pMes)
 	{
-		return null;
+		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
+		//primero debo ordenar la lista de mayor a menor
+		int contador = 0;
+		NodoListaEncadenada<ViajeUber> actualOrdenada = viajesMensuales.darNodoActual();
+		while(actualOrdenada!=null&&contador<=pN)
+		{
+			ViajeUber viajeActual = actualOrdenada.darElemento();
+			rta.agregarElemento(viajeActual);
+			contador++;
+		}
+		return rta;
 	}
 	public String comparacionTiemposPromedio(String pSourceid,String pMes)
 	{
@@ -291,7 +315,21 @@ public class ProyectoMundo
 	}
 	public ListaEncadenada<ViajeUber> consultarCantidadViajesHora(String pOrigen, String pDestino, String pHoraInicio,String pHoraFin)
 	{
-		return null;
+		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
+		NodoListaEncadenada<ViajeUber> actual = viajesHorarios.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			if(viajeActual.darHora()>=Integer.parseInt(pHoraInicio)&&viajeActual.darHora()<=Integer.parseInt(pHoraFin))
+			{
+				if(Integer.parseInt(pOrigen)==viajeActual.darSourceid()&&Integer.parseInt(pDestino)==viajeActual.darDstid())
+				{
+							rta.agregarElemento(viajeActual);
+				}
+			}
+			actual = actual.darSiguiente();
+		}
+		return rta;
 	}
 	public void generarTablaAscii(String pSourceId,String pDestino)
 	{

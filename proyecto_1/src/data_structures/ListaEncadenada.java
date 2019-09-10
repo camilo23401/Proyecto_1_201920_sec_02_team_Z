@@ -115,6 +115,10 @@ public class ListaEncadenada<E> implements IListaEncadenada<E> {
 	{
 		return primerNodo.darSiguiente();
 	}
+	public NodoListaEncadenada<E> darUltimoAgregado()
+	{
+		return ultimoAgregado;
+	}
 
 
 }
