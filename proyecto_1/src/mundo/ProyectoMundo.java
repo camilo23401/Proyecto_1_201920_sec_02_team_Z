@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.opencsv.CSVReader;
 
+import data_structures.ArregloDinamico;
 import data_structures.ListaEncadenada;
 import data_structures.NodoListaEncadenada;
 
@@ -18,11 +19,13 @@ public class ProyectoMundo
 	private CSVReader lector;
 	private CSVReader lector2;
 	private CSVReader lector3;
+	
 	public ProyectoMundo()
 	{
 		viajesMensuales = new ListaEncadenada<ViajeUber>();
 		viajesSemanales = new ListaEncadenada<ViajeUber>();
 		viajesHorarios = new ListaEncadenada<ViajeUber>();
+		
 	}
 	public String[] agregarDatos(String pTrimestre) throws IOException
 	{
@@ -181,7 +184,7 @@ public class ProyectoMundo
 		{
 			respuesta = z + "";
 		}
-		
+
 		return respuesta;
 	}
 	public int buscarMenorIdentificadorMensual()
@@ -264,34 +267,40 @@ public class ProyectoMundo
 			{
 				if(Integer.parseInt(pSourceid)==elementoActual.darSourceid()&&Integer.parseInt(pDestino)==elementoActual.darDstid())
 				{
-							rta.agregarElemento(elementoActual);
+					rta.agregarElemento(elementoActual);
 				}
 			}
 			actual = actual.darSiguiente();
 		}
 		return rta;
 	}
-	public ListaEncadenada<ViajeUber> consultarNViajesMasDemorados(int pN, String pMes)
+	public ArregloDinamico consultarNViajesMasDemoradosMensual(int pN, String pMes)
 	{
-		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
-		//primero debo ordenar la lista de mayor a menor
+		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
+		ArregloDinamico copiaPorOrganizar = new ArregloDinamico(1000);
 		int contador = 0;
-		NodoListaEncadenada<ViajeUber> actualOrdenada = viajesMensuales.darNodoActual();
-		while(actualOrdenada!=null&&contador<=pN)
+		while(actual!=null)
 		{
-			ViajeUber viajeActual = actualOrdenada.darElemento();
-			rta.agregarElemento(viajeActual);
-			contador++;
+			ViajeUber viajeActual = actual.darElemento();
+			if(Integer.parseInt(pMes)==viajeActual.darMes()&&contador<pN)
+			{
+				contador++;
+				copiaPorOrganizar.agregar(viajeActual);	
+			}
+			actual = actual.darSiguiente();
+		}
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
+		ArregloDinamico rta = new ArregloDinamico(pN);
+		for(int i=copiaPorOrganizar.darTamano()-1;i>=0;i--)
+		{
+			ViajeUber elementoMayor = copiaPorOrganizar.darElemento(i);
+			rta.agregar(elementoMayor);
 		}
 		return rta;
 	}
 	public String comparacionTiemposPromedio(String pSourceid,String pMes)
 	{
 		return "";
-	}
-	public ListaEncadenada<ViajeUber> consultarNViajesMasDemoradosMensual(int pN, String pMes)
-	{
-		return null;
 	}
 	public String comparacionTiemposPromedioMes(String pSourceid,String pMes)
 	{
@@ -324,15 +333,41 @@ public class ProyectoMundo
 			{
 				if(Integer.parseInt(pOrigen)==viajeActual.darSourceid()&&Integer.parseInt(pDestino)==viajeActual.darDstid())
 				{
-							rta.agregarElemento(viajeActual);
+					rta.agregarElemento(viajeActual);
 				}
 			}
 			actual = actual.darSiguiente();
 		}
 		return rta;
 	}
+	public ArregloDinamico consultarNViajesMasDemoradosHora(int pN, String pHora)
+	{
+		NodoListaEncadenada<ViajeUber> actual = viajesHorarios.darNodoActual();
+		ArregloDinamico copiaPorOrganizar = new ArregloDinamico(1000);
+		int contador = 0;
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			if(Short.parseShort(pHora)==viajeActual.darHora()&&contador<pN)
+			{
+				contador++;
+				copiaPorOrganizar.agregar(viajeActual);	
+			}
+			actual = actual.darSiguiente();
+		}
+		System.out.println(copiaPorOrganizar.darTamano());
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
+		ArregloDinamico rta = new ArregloDinamico(pN);
+		for(int i=copiaPorOrganizar.darTamano()-1;i>=0;i--)
+		{
+			ViajeUber elementoMayor = copiaPorOrganizar.darElemento(i);
+			rta.agregar(elementoMayor);
+		}
+		System.out.println(rta.darTamano());
+		return rta;
+	}
 	public void generarTablaAscii(String pSourceId,String pDestino)
 	{
-		
+
 	}
 }

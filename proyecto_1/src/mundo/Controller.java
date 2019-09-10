@@ -3,6 +3,7 @@ package mundo;
 import java.util.Scanner;
 
 import consola.InteraccionConsola;
+import data_structures.ArregloDinamico;
 import data_structures.ListaEncadenada;
 import data_structures.NodoListaEncadenada;
 
@@ -86,6 +87,40 @@ public class Controller
 				break;
 
 			case 3:
+				System.out.println("Digite número de datos a buscar");
+				int num = Integer.parseInt(lector.next());
+				System.out.println("Digite el mes a consultar");
+				String mesConsulta = lector.next();
+				ArregloDinamico rta = proyecto.consultarNViajesMasDemoradosMensual(num, mesConsulta);
+				int contador2 = 0;
+				for(int i=0;i<rta.darTamano();i++)
+				{
+					contador2++;
+					ViajeUber elementoActual = rta.darElemento(i);
+					System.out.println("---------------------------------------------------------------------------------------");
+					System.out.println("Número de viaje: " + contador2);
+					System.out.println("Zona de origen: " + elementoActual.darSourceid());
+					System.out.println("Zona de destino: " + elementoActual.darDstid());
+					System.out.println("Tiempo promedio: " + elementoActual.darTiempoPromedio());
+					System.out.println("Desviación estándar: " + elementoActual.darDesviacionEstandarTiempo());
+					System.out.println("---------------------------------------------------------------------------------------");
+				}	
+
+				break;
+				
+			case 4:
+				break;
+				
+			case 5:
+				break;
+				
+			case 6:
+				break;
+				
+			case 7:
+				break;
+				
+			case 8:
 				System.out.println("Digite la hora de inicio");
 				String horaInicio = lector.next();
 				System.out.println("Digite la zona de origen");
@@ -111,8 +146,33 @@ public class Controller
 				}
 				break;
 
+			case 9:
 
-			case 4:
+				System.out.println("Digite número de datos a buscar");
+				int numDatos = Integer.parseInt(lector.next());
+				System.out.println("Digite la hora a consultar");
+				String horaConsulta = lector.next();
+				ArregloDinamico respuesta = proyecto.consultarNViajesMasDemoradosHora(numDatos, horaConsulta);
+				int contador3 = 0;
+				for(int i=0;i<respuesta.darTamano();i++)
+				{
+					contador3++;
+					ViajeUber elementoActual = respuesta.darElemento(i);
+					System.out.println("---------------------------------------------------------------------------------------");
+					System.out.println("Número de viaje: " + contador3);
+					System.out.println("Zona de origen: " + elementoActual.darSourceid());
+					System.out.println("Zona de destino: " + elementoActual.darDstid());
+					System.out.println("Tiempo promedio: " + elementoActual.darTiempoPromedio());
+					System.out.println("Desviación estándar: " + elementoActual.darDesviacionEstandarTiempo());
+					System.out.println("---------------------------------------------------------------------------------------");
+				}	
+
+				break;
+				
+			case 10:
+				break;
+				
+			case 11:
 				System.out.println("--------------------------------------- \n Adiós \n ---------------------------------------"); 
 				lector.close();
 				finalizado = true;

@@ -1,6 +1,7 @@
 package mundo;
 
-public class ViajeUber 
+
+public class ViajeUber implements Comparable<ViajeUber>
 {
 
 	private int sourceid;
@@ -61,6 +62,27 @@ public class ViajeUber
 	public double darDesviacionEstandarTiempoGeometrico()
 	{
 		return desviacionEstandarTiempoGeometrico;
+	}
+	@Override
+	public int compareTo(ViajeUber comp) {
+		double comparacion = this.darTiempoPromedio()-comp.darTiempoPromedio();
+		int compa=0;
+		if(comparacion > 0){
+			compa=1;
+		}
+		else if(comparacion < 0){
+			compa=-1;
+		}
+		else{
+			double comparacion2=this.darDesviacionEstandarTiempo()-comp.darDesviacionEstandarTiempo();
+			if(comparacion2 > 0){
+				compa=1;
+			}
+			else if(comparacion2 < 0){
+				compa=-1;
+			}
+		}
+		return compa;
 	}
 }
 
