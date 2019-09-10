@@ -84,5 +84,17 @@ public class ViajeUber implements Comparable<ViajeUber>
 		}
 		return compa;
 	}
+	public int compareToZonal(ViajeUber comp) {
+		double comparacion = this.darSourceid()-comp.darSourceid();
+		int compa=0;
+		if(comparacion > 0){
+			compa=1;
+		}
+		else if(comparacion < 0){
+			compa=-1;
+		}
+
+		return compa;
+	}
 }
 

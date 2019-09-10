@@ -118,6 +118,15 @@ public class ArregloDinamico implements IArregloDinamico {
 			quickSort(arr, partitionIndex+1, end);
 		}
 	}
+	public void quickSortZonal(ArregloDinamico arr, int begin, int end) {
+		if (begin < end) {
+			int partitionIndex = partitionZonal(arr, begin, end);
+
+			quickSort(arr, begin, partitionIndex-1);
+			quickSort(arr, partitionIndex+1, end);
+		}
+	}
+
 	private int partition(ArregloDinamico arr, int begin, int end) {
 		ViajeUber pivot = arr.darElemento(end);
 		int i = (begin-1);
@@ -136,6 +145,25 @@ public class ArregloDinamico implements IArregloDinamico {
 
 		return i+1;
 	}
+	private int partitionZonal(ArregloDinamico arr, int begin, int end) {
+		ViajeUber pivot = arr.darElemento(end);
+		int i = (begin-1);
+		for (int j = begin; j < end; j++) {
+			if (arr.darElemento(j).compareToZonal(pivot)<=0) {
+				i++;
+				ViajeUber swapTemp = arr.darElemento(i);
+				arr.darElementos()[i] = arr.darElementos()[j];
+				arr.darElementos()[j] = swapTemp;
+			}
+		}
+
+		ViajeUber swapTemp = arr.darElemento(i+1);
+		arr.darElementos()[i+1] = arr.darElementos()[end];
+		arr.darElementos()[end] = swapTemp;
+
+		return i+1;
+	}
+
 	public int darCapacidad() {
 		return tamanoMax;
 	}
