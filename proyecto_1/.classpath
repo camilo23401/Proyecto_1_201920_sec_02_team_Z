@@ -8,5 +8,11 @@
 	<classpathentry kind="lib" path="D:/Estructuras de datos/Proyecto 1/Proyecto_1_201920_sec_02_team_Z/proyecto_1/lib/commons-lang3-3.9-test-sources.jar"/>
 	<classpathentry kind="lib" path="D:/Estructuras de datos/Proyecto 1/Proyecto_1_201920_sec_02_team_Z/proyecto_1/lib/opencsv-4.6.jar"/>
 	<classpathentry kind="lib" path="D:/Estructuras de datos/Proyecto 1/Proyecto_1_201920_sec_02_team_Z/proyecto_1/lib/univocity-parsers-2.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nplat/Documents/Talleres/Proyecto_1_201920_sec_02_team_naplata_cagarciav/proyecto_1/lib/commons-lang3-3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nplat/Documents/Talleres/Proyecto_1_201920_sec_02_team_naplata_cagarciav/proyecto_1/lib/commons-lang3-3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nplat/Documents/Talleres/Proyecto_1_201920_sec_02_team_naplata_cagarciav/proyecto_1/lib/commons-lang3-3.9-tests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nplat/Documents/Talleres/Proyecto_1_201920_sec_02_team_naplata_cagarciav/proyecto_1/lib/commons-lang3-3.9-test-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nplat/Documents/Talleres/Proyecto_1_201920_sec_02_team_naplata_cagarciav/proyecto_1/lib/opencsv-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nplat/Documents/Talleres/Proyecto_1_201920_sec_02_team_naplata_cagarciav/proyecto_1/lib/univocity-parsers-2.8.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

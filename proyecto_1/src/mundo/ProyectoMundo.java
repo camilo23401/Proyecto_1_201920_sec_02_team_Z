@@ -19,13 +19,13 @@ public class ProyectoMundo
 	private CSVReader lector;
 	private CSVReader lector2;
 	private CSVReader lector3;
-	
+
 	public ProyectoMundo()
 	{
 		viajesMensuales = new ListaEncadenada<ViajeUber>();
 		viajesSemanales = new ListaEncadenada<ViajeUber>();
 		viajesHorarios = new ListaEncadenada<ViajeUber>();
-		
+
 	}
 	public String[] agregarDatos(String pTrimestre) throws IOException
 	{
@@ -277,26 +277,13 @@ public class ProyectoMundo
 	public ArregloDinamico consultarNViajesMasDemoradosMensual(int pN, String pMes)
 	{
 		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
-		ArregloDinamico copiaPorOrganizar = new ArregloDinamico(1000);
-		int contador = 0;
-		while(actual!=null)
-		{
-			ViajeUber viajeActual = actual.darElemento();
-			if(Integer.parseInt(pMes)==viajeActual.darMes()&&contador<pN)
-			{
-				contador++;
-				copiaPorOrganizar.agregar(viajeActual);	
-			}
-			actual = actual.darSiguiente();
+		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoMes(actual, pMes);
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1,false);
+		ArregloDinamico nElementos=new ArregloDinamico(pN+1);
+		for(int i=0;i<pN;i++) {
+			nElementos.agregar(copiaPorOrganizar.darElemento(i));
 		}
-		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
-		ArregloDinamico rta = new ArregloDinamico(pN);
-		for(int i=copiaPorOrganizar.darTamano()-1;i>=0;i--)
-		{
-			ViajeUber elementoMayor = copiaPorOrganizar.darElemento(i);
-			rta.agregar(elementoMayor);
-		}
-		return rta;
+		return nElementos;
 	}
 	public String comparacionTiemposPromedio(String pSourceid,String pMes)
 	{
@@ -308,11 +295,32 @@ public class ProyectoMundo
 	}
 	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasDiario(String pSourceid, String pDestino, String pDia)
 	{
-		return null;
+		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
+		NodoListaEncadenada<ViajeUber> actual = viajesSemanales.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber elementoActual = actual.darElemento();
+			if(Integer.parseInt(pDia)==elementoActual.darDia())
+			{
+				if(Integer.parseInt(pSourceid)==elementoActual.darSourceid()&&Integer.parseInt(pDestino)==elementoActual.darDstid())
+				{
+					rta.agregarElemento(elementoActual);
+				}
+			}
+			actual = actual.darSiguiente();
+		}
+		return rta;
 	}
-	public ListaEncadenada<ViajeUber> consultarNViajesMasDemoradosDiarios(int pN, String pDia)
+	public ArregloDinamico consultarNViajesMasDemoradosDiarios(int pN, String pDia)
 	{
-		return null;
+		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
+		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoDia(actual, pDia);
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1,false);
+		ArregloDinamico nElementos=new ArregloDinamico(pN+1);
+		for(int i=0;i<pN;i++) {
+			nElementos.agregar(copiaPorOrganizar.darElemento(i));
+		}
+		return nElementos;
 	}
 	public String comparacionTiemposPromedioDia(String pSourceid,String pDia)
 	{
@@ -356,7 +364,7 @@ public class ProyectoMundo
 			actual = actual.darSiguiente();
 		}
 		System.out.println(copiaPorOrganizar.darTamano());
-		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1,false);
 		ArregloDinamico rta = new ArregloDinamico(pN);
 		for(int i=copiaPorOrganizar.darTamano()-1;i>=0;i--)
 		{
@@ -370,4 +378,29 @@ public class ProyectoMundo
 	{
 
 	}
+	public ArregloDinamico pasarAArregloDinamicoDia(NodoListaEncadenada<ViajeUber>actual,String dia) {
+		ArregloDinamico nuevo=new ArregloDinamico(1000);
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			if(viajeActual.darDia()==Integer.parseInt(dia)) {
+				nuevo.agregar(viajeActual);
+			}
+			actual = actual.darSiguiente();
+		}
+		return nuevo;
+	}
+	public ArregloDinamico pasarAArregloDinamicoMes(NodoListaEncadenada<ViajeUber>actual,String mes) {
+		ArregloDinamico nuevo=new ArregloDinamico(1000);
+		while(actual!=null)
+		{
+			ViajeUber viajeActual = actual.darElemento();
+			if(viajeActual.darMes()==Integer.parseInt(mes)) {
+				nuevo.agregar(viajeActual);
+			}
+			actual = actual.darSiguiente();
+		}
+		return nuevo;
+	}
+
 }
