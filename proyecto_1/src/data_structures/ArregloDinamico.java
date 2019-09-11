@@ -145,25 +145,35 @@ public class ArregloDinamico implements IArregloDinamico {
 
 		return i+1;
 	}
-	public void quickSortZonal(ArregloDinamico arr, int begin, int end) {
+	public void quickSortZonal(ArregloDinamico arr, int begin, int end,boolean ascendente) {
 		if (begin < end) {
-			int partitionIndex = partitionZonal(arr, begin, end);
+			int partitionIndex = partitionZonal(arr, begin, end,ascendente);
 
-			quickSort(arr, begin, partitionIndex-1);
-			quickSort(arr, partitionIndex+1, end);
+			quickSortZonal(arr, begin, partitionIndex-1,false);
+			quickSortZonal(arr, partitionIndex+1, end,false);
 		}
 	}
 
 
-	private int partitionZonal(ArregloDinamico arr, int begin, int end) {
+	private int partitionZonal(ArregloDinamico arr, int begin, int end,boolean ascendente) {
 		ViajeUber pivot = arr.darElemento(end);
 		int i = (begin-1);
 		for (int j = begin; j < end; j++) {
+			if(ascendente) {
 			if (arr.darElemento(j).compareToZonal(pivot)<=0) {
 				i++;
 				ViajeUber swapTemp = arr.darElemento(i);
 				arr.darElementos()[i] = arr.darElementos()[j];
 				arr.darElementos()[j] = swapTemp;
+			}
+			}
+			else {
+				if (arr.darElemento(j).compareToZonal(pivot)>=0) {
+					i++;
+					ViajeUber swapTemp = arr.darElemento(i);
+					arr.darElementos()[i] = arr.darElementos()[j];
+					arr.darElementos()[j] = swapTemp;
+				}
 			}
 		}
 
