@@ -280,7 +280,8 @@ public class ProyectoMundo
 		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoMes(actual, pMes);
 		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
 		ArregloDinamico nElementos=new ArregloDinamico(500000);
-		for(int i=0;i<pN;i++) {
+		for(int i=0;i<pN;i++) 
+		{
 			nElementos.agregar(copiaPorOrganizar.darElemento(i));
 		}
 		return nElementos;
@@ -317,7 +318,8 @@ public class ProyectoMundo
 		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoDia(actual, pDia);
 		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
 		ArregloDinamico nElementos=new ArregloDinamico(500000);
-		for(int i=0;i<pN;i++) {
+		for(int i=0;i<pN;i++) 
+		{
 			nElementos.agregar(copiaPorOrganizar.darElemento(i));
 		}
 		return nElementos;
@@ -351,28 +353,14 @@ public class ProyectoMundo
 	public ArregloDinamico consultarNViajesMasDemoradosHora(int pN, String pHora)
 	{
 		NodoListaEncadenada<ViajeUber> actual = viajesHorarios.darNodoActual();
-		ArregloDinamico copiaPorOrganizar = new ArregloDinamico(1000);
-		int contador = 0;
-		while(actual!=null)
-		{
-			ViajeUber viajeActual = actual.darElemento();
-			if(Short.parseShort(pHora)==viajeActual.darHora()&&contador<pN)
-			{
-				contador++;
-				copiaPorOrganizar.agregar(viajeActual);	
-			}
-			actual = actual.darSiguiente();
-		}
-		System.out.println(copiaPorOrganizar.darTamano());
+		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoHora(actual, pHora);
 		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
-		ArregloDinamico rta = new ArregloDinamico(500000);
-		for(int i=copiaPorOrganizar.darTamano()-1;i>=0;i--)
+		ArregloDinamico nElementos=new ArregloDinamico(500000);
+		for(int i=0;i<pN;i++) 
 		{
-			ViajeUber elementoMayor = copiaPorOrganizar.darElemento(i);
-			rta.agregar(elementoMayor);
+			nElementos.agregar(copiaPorOrganizar.darElemento(i));
 		}
-		System.out.println(rta.darTamano());
-		return rta;
+		return nElementos;
 	}
 	public void generarTablaAscii(String pSourceId,String pDestino)
 	{
@@ -399,6 +387,19 @@ public class ProyectoMundo
 				nuevo.agregar(viajeActual);
 			}
 			actual = actual.darSiguiente();
+		}
+		return nuevo;
+	}
+	public ArregloDinamico pasarAArregloDinamicoHora(NodoListaEncadenada<ViajeUber>pActual, String pHora)
+	{
+		ArregloDinamico nuevo = new ArregloDinamico(500000);
+		while(pActual!=null)
+		{
+			ViajeUber viajeActual = pActual.darElemento();
+			if(viajeActual.darHora()==Short.parseShort(pHora)) {
+				nuevo.agregar(viajeActual);
+			}
+			pActual = pActual.darSiguiente();
 		}
 		return nuevo;
 	}
