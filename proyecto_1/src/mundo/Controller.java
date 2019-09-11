@@ -92,6 +92,7 @@ public class Controller
 				System.out.println("Digite el mes a consultar");
 				String mesConsulta = lector.next();
 				ArregloDinamico rta = proyecto.consultarNViajesMasDemoradosMensual(num, mesConsulta);
+				System.out.println(rta.darTamano());
 				int contador2 = 0;
 				for(int i=0;i<rta.darTamano();i++)
 				{

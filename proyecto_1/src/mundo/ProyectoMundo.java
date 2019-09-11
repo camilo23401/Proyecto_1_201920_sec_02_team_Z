@@ -278,8 +278,8 @@ public class ProyectoMundo
 	{
 		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
 		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoMes(actual, pMes);
-		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1,false);
-		ArregloDinamico nElementos=new ArregloDinamico(pN+1);
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
+		ArregloDinamico nElementos=new ArregloDinamico(500000);
 		for(int i=0;i<pN;i++) {
 			nElementos.agregar(copiaPorOrganizar.darElemento(i));
 		}
@@ -315,8 +315,8 @@ public class ProyectoMundo
 	{
 		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
 		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoDia(actual, pDia);
-		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1,false);
-		ArregloDinamico nElementos=new ArregloDinamico(pN+1);
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
+		ArregloDinamico nElementos=new ArregloDinamico(500000);
 		for(int i=0;i<pN;i++) {
 			nElementos.agregar(copiaPorOrganizar.darElemento(i));
 		}
@@ -364,8 +364,8 @@ public class ProyectoMundo
 			actual = actual.darSiguiente();
 		}
 		System.out.println(copiaPorOrganizar.darTamano());
-		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1,false);
-		ArregloDinamico rta = new ArregloDinamico(pN);
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
+		ArregloDinamico rta = new ArregloDinamico(500000);
 		for(int i=copiaPorOrganizar.darTamano()-1;i>=0;i--)
 		{
 			ViajeUber elementoMayor = copiaPorOrganizar.darElemento(i);
@@ -379,7 +379,7 @@ public class ProyectoMundo
 
 	}
 	public ArregloDinamico pasarAArregloDinamicoDia(NodoListaEncadenada<ViajeUber>actual,String dia) {
-		ArregloDinamico nuevo=new ArregloDinamico(1000);
+		ArregloDinamico nuevo=new ArregloDinamico(500000);
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
@@ -391,7 +391,7 @@ public class ProyectoMundo
 		return nuevo;
 	}
 	public ArregloDinamico pasarAArregloDinamicoMes(NodoListaEncadenada<ViajeUber>actual,String mes) {
-		ArregloDinamico nuevo=new ArregloDinamico(1000);
+		ArregloDinamico nuevo=new ArregloDinamico(500000);
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();

@@ -110,33 +110,26 @@ public class ArregloDinamico implements IArregloDinamico {
 		}
 	}
 
-	public void quickSort(ArregloDinamico arr, int begin, int end,boolean ascendente) {
+	public void quickSort(ArregloDinamico arr, int begin, int end) {
 		if (begin < end) {
-			int partitionIndex = partition(arr, begin, end,ascendente);
+			int partitionIndex = partition(arr, begin, end);
 
-			quickSort(arr, begin, partitionIndex-1,ascendente);
-			quickSort(arr, partitionIndex+1, end,ascendente);
+			quickSort(arr, begin, partitionIndex-1);
+			quickSort(arr, partitionIndex+1, end);
 		}
 	}
-	private int partition(ArregloDinamico arr, int begin, int end,boolean ascendente) {
+	private int partition(ArregloDinamico arr, int begin, int end) {
 		ViajeUber pivot = arr.darElemento(end);
 		int i = (begin-1);
 		for (int j = begin; j < end; j++) {
-			if(ascendente)
-			if (arr.darElemento(j).compareTo(pivot)<=0) {
+			
+			if (arr.darElemento(j).compareTo(pivot)>=0) {
 				i++;
 				ViajeUber swapTemp = arr.darElemento(i);
 				arr.darElementos()[i] = arr.darElementos()[j];
 				arr.darElementos()[j] = swapTemp;
 			}
-			else {
-				if (arr.darElemento(j).compareTo(pivot)>=0) {
-					i++;
-					ViajeUber swapTemp = arr.darElemento(i);
-					arr.darElementos()[i] = arr.darElementos()[j];
-					arr.darElementos()[j] = swapTemp;
-				}
-			}
+			
 		}
 
 		ViajeUber swapTemp = arr.darElemento(i+1);
@@ -145,36 +138,28 @@ public class ArregloDinamico implements IArregloDinamico {
 
 		return i+1;
 	}
-	public void quickSortZonal(ArregloDinamico arr, int begin, int end,boolean ascendente) {
+	public void quickSortZonal(ArregloDinamico arr, int begin, int end) {
 		if (begin < end) {
-			int partitionIndex = partitionZonal(arr, begin, end,ascendente);
+			int partitionIndex = partitionZonal(arr, begin, end);
 
-			quickSortZonal(arr, begin, partitionIndex-1,false);
-			quickSortZonal(arr, partitionIndex+1, end,false);
+			quickSortZonal(arr, begin, partitionIndex-1);
+			quickSortZonal(arr, partitionIndex+1, end);
 		}
 	}
 
 
-	private int partitionZonal(ArregloDinamico arr, int begin, int end,boolean ascendente) {
+	private int partitionZonal(ArregloDinamico arr, int begin, int end) {
 		ViajeUber pivot = arr.darElemento(end);
 		int i = (begin-1);
 		for (int j = begin; j < end; j++) {
-			if(ascendente) {
+			
 			if (arr.darElemento(j).compareToZonal(pivot)<=0) {
 				i++;
 				ViajeUber swapTemp = arr.darElemento(i);
 				arr.darElementos()[i] = arr.darElementos()[j];
 				arr.darElementos()[j] = swapTemp;
 			}
-			}
-			else {
-				if (arr.darElemento(j).compareToZonal(pivot)>=0) {
-					i++;
-					ViajeUber swapTemp = arr.darElemento(i);
-					arr.darElementos()[i] = arr.darElementos()[j];
-					arr.darElementos()[j] = swapTemp;
-				}
-			}
+			
 		}
 
 		ViajeUber swapTemp = arr.darElemento(i+1);
