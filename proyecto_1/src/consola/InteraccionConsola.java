@@ -15,7 +15,7 @@ public class InteraccionConsola
 		System.out.println("2. Tiempo promedio y desviación estándar entre zona de origen y zona de destino mensualmente");
 		System.out.println("3. Consultar N viajes más demorados de un mes dado");
 		System.out.println("4. Comparar tiempos promedios de viajes mensualmente");
-		System.out.println("5. Tiempo promedio y disviación estándar entre zona de origen y zona de destino diariamente");
+		System.out.println("5. Tiempo promedio y desviación estándar entre zona de origen y zona de destino diariamente");
 		System.out.println("6. Consultar N viajes más demorados de un día");
 		System.out.println("7. Comparar tiempos promedios de viajes diarios");
 		System.out.println("8. Tiempo promedio y desviación estándar entre zona de origen y zona de destino entre un rango de horas dadas");

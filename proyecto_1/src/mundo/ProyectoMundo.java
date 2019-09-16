@@ -256,6 +256,24 @@ public class ProyectoMundo
 		}
 		return menor;
 	}
+	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasHora(String pSourceid, String pDestino, int pHora)
+	{
+		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
+		NodoListaEncadenada<ViajeUber> actual = viajesHorarios.darNodoActual();
+		while(actual!=null)
+		{
+			ViajeUber elementoActual = actual.darElemento();
+			if(pHora==elementoActual.darHora())
+			{
+				if(Integer.parseInt(pSourceid)==elementoActual.darSourceid()&&Integer.parseInt(pDestino)==elementoActual.darDstid())
+				{
+					rta.agregarElemento(elementoActual);
+				}
+			}
+			actual = actual.darSiguiente();
+		}
+		return rta;
+	}
 	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasMensual(String pSourceid, String pDestino, String pMes)
 	{
 		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
@@ -273,26 +291,6 @@ public class ProyectoMundo
 			actual = actual.darSiguiente();
 		}
 		return rta;
-	}
-	public ArregloDinamico consultarNViajesMasDemoradosMensual(int pN, String pMes)
-	{
-		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
-		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoMes(actual, pMes);
-		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
-		ArregloDinamico nElementos=new ArregloDinamico(500000);
-		for(int i=0;i<pN;i++) 
-		{
-			nElementos.agregar(copiaPorOrganizar.darElemento(i));
-		}
-		return nElementos;
-	}
-	public String comparacionTiemposPromedio(String pSourceid,String pMes)
-	{
-		return "";
-	}
-	public String comparacionTiemposPromedioMes(String pSourceid,String pMes)
-	{
-		return "";
 	}
 	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasDiario(String pSourceid, String pDestino, String pDia)
 	{
@@ -312,9 +310,29 @@ public class ProyectoMundo
 		}
 		return rta;
 	}
-	public ArregloDinamico consultarNViajesMasDemoradosDiarios(int pN, String pDia)
+	public String comparacionTiemposPromedio(String pSourceid,String pMes)
+	{
+		return "";
+	}
+	public String comparacionTiemposPromedioMes(String pSourceid,String pMes)
+	{
+		return "";
+	}
+	public ArregloDinamico consultarNViajesMasDemoradosMensual(int pN, String pMes)
 	{
 		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
+		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoMes(actual, pMes);
+		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
+		ArregloDinamico nElementos=new ArregloDinamico(500000);
+		for(int i=0;i<pN;i++) 
+		{
+			nElementos.agregar(copiaPorOrganizar.darElemento(i));
+		}
+		return nElementos;
+	}
+	public ArregloDinamico consultarNViajesMasDemoradosDiarios(int pN, String pDia)
+	{
+		NodoListaEncadenada<ViajeUber> actual = viajesSemanales.darNodoActual();
 		ArregloDinamico copiaPorOrganizar = this.pasarAArregloDinamicoDia(actual, pDia);
 		copiaPorOrganizar.quickSort(copiaPorOrganizar, 0, copiaPorOrganizar.darTamano()-1);
 		ArregloDinamico nElementos=new ArregloDinamico(500000);
@@ -328,9 +346,21 @@ public class ProyectoMundo
 	{
 		return "";
 	}
-	public ListaEncadenada<ViajeUber> consultarTiemposEntreZonasHora(String pSourceid, String pDestino, String pHora)
-	{
-		return null;
+
+
+	public double regresarTiempoPromedioSegundos(ListaEncadenada<ViajeUber>consulta) {
+		NodoListaEncadenada<ViajeUber>act=consulta.darNodoActual();
+		double tiempo=0.0;
+		while(act!=null) {
+			tiempo+=act.darElemento().darTiempoPromedio();
+			act=act.darSiguiente();
+		}
+		if(consulta.darTamano()>0) {
+			tiempo=tiempo/consulta.darTamano();
+		
+		}
+		return tiempo/60 ;
+
 	}
 	public ListaEncadenada<ViajeUber> consultarCantidadViajesHora(String pOrigen, String pDestino, String pHoraInicio,String pHoraFin)
 	{
@@ -367,7 +397,7 @@ public class ProyectoMundo
 
 	}
 	public ArregloDinamico pasarAArregloDinamicoDia(NodoListaEncadenada<ViajeUber>actual,String dia) {
-		ArregloDinamico nuevo=new ArregloDinamico(500000);
+		ArregloDinamico nuevo=new ArregloDinamico(1000000);
 		while(actual!=null)
 		{
 			ViajeUber viajeActual = actual.darElemento();
