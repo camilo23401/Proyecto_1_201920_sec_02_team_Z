@@ -109,6 +109,29 @@ public class Controller
 				break;
 
 			case 4:
+				System.out.println("Digite el mes a buscar");
+				String mesComparacion = lector.next();
+				System.out.println("Digite la zona a comparar");
+				int zonaComparar = Integer.parseInt(lector.next());
+				System.out.println("Digite la franja de zona inferior");
+				int franjaInferior = Integer.parseInt(lector.next());
+				System.out.println("Digite la franja de zona superior");
+				int franjaSuperior = Integer.parseInt(lector.next());
+				ListaEncadenada<ViajeUber>comparacion=proyecto.regresarZonasFranjaMes(franjaInferior, franjaSuperior, mesComparacion);
+				ArregloDinamico ordenado=proyecto.pasarAArregloDinamico(comparacion.darNodoActual());
+				ordenado.quickSortZonal(ordenado, 0, ordenado.darTamano()-1);
+				for(int i=franjaInferior;i<=franjaSuperior;i++) {
+					String promedioIda=Double.toString(proyecto.regresarTiempoPromedioViajeIdaDesdeZonaX(i, ordenado,zonaComparar));
+					String promedioRegreso=Double.toString(proyecto.regresarTiempoPromedioViajeRegresoDesdeZonaX(i, ordenado,zonaComparar));
+					if(promedioIda.equals("0.0")) {
+						promedioIda="No hay viajes";
+					}
+					if(promedioRegreso.equals("0.0") ){
+						promedioRegreso="No hay viajes";
+					}
+					System.out.println(promedioIda+" de "+zonaComparar+" a " +i+" vs "+promedioRegreso+" de "+i+" a "+zonaComparar);
+				}
+				
 				break;
 
 			case 5:
@@ -149,8 +172,6 @@ public class Controller
 				System.out.println("Digite el dia a consultar");
 				String diaConsulta1 = lector.next();
 				ArregloDinamico rta1 = proyecto.consultarNViajesMasDemoradosDiarios(num1, diaConsulta1);
-				System.out.println(rta1.darTamano());
-				System.out.println(rta1.darElemento(0).darDia());
 				int contador3 = 0;
 				for(int i=0;i<rta1.darTamano();i++)
 				{
@@ -170,21 +191,48 @@ public class Controller
 				break;
 
 			case 7:
+				System.out.println("Digite el dia a buscar");
+				String diaComparacion = lector.next();
+				System.out.println("Digite la zona a comparar");
+				int zonaComparar1 = Integer.parseInt(lector.next());
+				System.out.println("Digite la franja de zona inferior");
+				int franjaInferior1 = Integer.parseInt(lector.next());
+				System.out.println("Digite la franja de zona superior");
+				int franjaSuperior1 = Integer.parseInt(lector.next());
+				ListaEncadenada<ViajeUber>comparacion1=proyecto.regresarZonasFranjaMes(franjaInferior1, franjaSuperior1, diaComparacion);
+				ArregloDinamico ordenado1=proyecto.pasarAArregloDinamico(comparacion1.darNodoActual());
+				ordenado1.quickSortZonal(ordenado1, 0, ordenado1.darTamano()-1);
+				for(int i=franjaInferior1;i<=franjaSuperior1;i++) {
+					String promedioIda=Double.toString(proyecto.regresarTiempoPromedioViajeIdaDesdeZonaX(i, ordenado1,zonaComparar1));
+					String promedioRegreso=Double.toString(proyecto.regresarTiempoPromedioViajeRegresoDesdeZonaX(i, ordenado1,zonaComparar1));
+					if(promedioIda.equals("0.0")) {
+						promedioIda="No hay viajes";
+					}
+					if(promedioRegreso.equals("0.0") ){
+						promedioRegreso="No hay viajes";
+					}
+					System.out.println(promedioIda+" de "+zonaComparar1+" a " +i+" vs "+promedioRegreso+" de "+i+" a "+zonaComparar1);
+				}
+				
 				break;
 
 			case 8:
-				System.out.println("Digite la hora de inicio");
-				String horaInicio = lector.next();
+				
 				System.out.println("Digite la zona de origen");
 				String origen = lector.next();
-				System.out.println("Digite la hora de fin");
-				String horaFin = lector.next();
 				System.out.println("Digite la zona de destino");
 				String destino = lector.next();
-
+				System.out.println("Digite la hora de inicio");
+				String horaInicio = lector.next();
+				System.out.println("Digite la hora de fin");
+				String horaFin = lector.next();
+			
 				ListaEncadenada<ViajeUber> resultados = proyecto.consultarCantidadViajesHora(origen, destino, horaInicio, horaFin);
 				NodoListaEncadenada<ViajeUber> actualResultados = resultados.darNodoActual();
 				int contadorMetodoHoras = 0;
+				if(resultados.darTamano()==0) {
+					System.out.println("No hay viajes que cumplan con estos criterios");
+				}
 				while(actualResultados!=null)
 				{
 					contadorMetodoHoras++;

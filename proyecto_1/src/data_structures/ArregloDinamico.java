@@ -153,7 +153,7 @@ public class ArregloDinamico implements IArregloDinamico {
 		int i = (begin-1);
 		for (int j = begin; j < end; j++) {
 			
-			if (arr.darElemento(j).compareToZonal(pivot)<=0) {
+			if (arr.darElemento(j).compareToZonal(pivot)>=0) {
 				i++;
 				ViajeUber swapTemp = arr.darElemento(i);
 				arr.darElementos()[i] = arr.darElementos()[j];
