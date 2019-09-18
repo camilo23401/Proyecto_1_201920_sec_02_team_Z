@@ -310,14 +310,6 @@ public class ProyectoMundo
 		}
 		return rta;
 	}
-	public String comparacionTiemposPromedio(String pSourceid,String pMes)
-	{
-		return "";
-	}
-	public String comparacionTiemposPromedioMes(String pSourceid,String pMes)
-	{
-		return "";
-	}
 	public ArregloDinamico consultarNViajesMasDemoradosMensual(int pN, String pMes)
 	{
 		NodoListaEncadenada<ViajeUber> actual = viajesMensuales.darNodoActual();
@@ -342,9 +334,6 @@ public class ProyectoMundo
 		}
 		return nElementos;
 	}
-
-
-
 	public double regresarTiempoPromedioSegundos(ListaEncadenada<ViajeUber>consulta) {
 		NodoListaEncadenada<ViajeUber>act=consulta.darNodoActual();
 		double tiempo=0.0;
@@ -388,10 +377,6 @@ public class ProyectoMundo
 			nElementos.agregar(copiaPorOrganizar.darElemento(i));
 		}
 		return nElementos;
-	}
-	public void generarTablaAscii(String pSourceId,String pDestino)
-	{
-
 	}
 	public ArregloDinamico pasarAArregloDinamicoDia(NodoListaEncadenada<ViajeUber>actual,String dia) {
 		ArregloDinamico nuevo=new ArregloDinamico(1000000);
@@ -477,7 +462,6 @@ public class ProyectoMundo
 			return 0.0;
 		}
 	}
-
 	public double regresarTiempoPromedioViajeRegresoDesdeZonaX(int zonaX,ArregloDinamico lista,int comp) {
 		int contador=0;
 		double tiempoPromedio=0.0;
@@ -495,24 +479,23 @@ public class ProyectoMundo
 			return 0.0;
 		}
 	}
-
-public ListaEncadenada<ViajeUber> regresarZonasFranjaDia(int zonaMenor, int zonaMayor, String pDia)
-{
-	ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
-	NodoListaEncadenada<ViajeUber> actual = viajesSemanales.darNodoActual();
-	while(actual!=null)
+	public ListaEncadenada<ViajeUber> regresarZonasFranjaDia(int zonaMenor, int zonaMayor, String pDia)
 	{
-		ViajeUber elementoActual = actual.darElemento();
-		if(Integer.parseInt(pDia)==elementoActual.darDia())
+		ListaEncadenada<ViajeUber> rta = new ListaEncadenada<ViajeUber>();
+		NodoListaEncadenada<ViajeUber> actual = viajesSemanales.darNodoActual();
+		while(actual!=null)
 		{
-			if((elementoActual.darSourceid()>=zonaMenor&&elementoActual.darSourceid()<=zonaMayor)||(elementoActual.darDstid()>=zonaMenor&&elementoActual.darDstid()<=zonaMayor))
+			ViajeUber elementoActual = actual.darElemento();
+			if(Integer.parseInt(pDia)==elementoActual.darDia())
 			{
-				rta.agregarElemento(elementoActual);
+				if((elementoActual.darSourceid()>=zonaMenor&&elementoActual.darSourceid()<=zonaMayor)||(elementoActual.darDstid()>=zonaMenor&&elementoActual.darDstid()<=zonaMayor))
+				{
+					rta.agregarElemento(elementoActual);
+				}
 			}
+			actual = actual.darSiguiente();
 		}
-		actual = actual.darSiguiente();
+		return rta;
 	}
-	return rta;
-}
 
 }
